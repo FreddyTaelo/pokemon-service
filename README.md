@@ -6,6 +6,9 @@ Get Pokemon details
 
 # Sample API CAll
 ```
+Swagger
+curl http://ec2-13-60-74-36.eu-north-1.compute.amazonaws.com:5000/swagger/index.html
+
 REQUEST( Get pokemon details by id)
 
  curl http://ec2-13-60-74-36.eu-north-1.compute.amazonaws.com:5000/api/pokemon/1  
