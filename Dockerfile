@@ -29,7 +29,7 @@ RUN chmod +x pokemon-service
 COPY .env .env
 
 # Expose the application port
-EXPOSE 5000
+EXPOSE 8080
 
 # Run the binary
 CMD ["./pokemon-service"]
