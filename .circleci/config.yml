@@ -3,7 +3,8 @@ version: 2.1
 executors:
   go-executor:
     docker:
-      - image: golang:1.22
+      - image: cimg/go:1.22
+      - image: docker:20.10.16-dind
     working_directory: ~/pokemon-service
 
 jobs:
@@ -28,7 +29,14 @@ jobs:
   build:
     executor: go-executor
     steps:
+      - setup_remote_docker:
+          version: 20.10.16
       - checkout
+      - run:
+          name: Install Docker CLI
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y docker-ce-cli
       - run:
           name: Build Go binary
           command: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/pokemon-service cmd/main.go
@@ -52,9 +60,15 @@ jobs:
     executor: go-executor
     docker:
       - image: circleci/python
+      - image: docker:20.10.16
     steps:
       - attach_workspace:
           at: .
+      - run:
+          name: Install Docker CLI
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y docker-ce-cli
       - run:
           name: Check files after attaching workspace
           command: ls -lh
