@@ -4,7 +4,7 @@ executors:
   go-executor:
     docker:
       - image: cimg/go:1.22
-      - image: docker:20.10.16-dind
+      - image: docker:dind
     working_directory: ~/pokemon-service
 
 jobs:
@@ -29,8 +29,7 @@ jobs:
   build:
     executor: go-executor
     steps:
-      - setup_remote_docker:
-          version: 20.10.16
+      - setup_remote_docker
       - checkout
       - run:
           name: Install Docker CLI
@@ -60,7 +59,7 @@ jobs:
     executor: go-executor
     docker:
       - image: circleci/python
-      - image: docker:20.10.16
+      - image: docker
     steps:
       - attach_workspace:
           at: .
