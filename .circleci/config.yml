@@ -32,12 +32,15 @@ jobs:
       - run:
           name: Build Go binary
           command: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/pokemon-service cmd/main.go
+orbs:
+  codecov: codecov/codecov@5
 
 workflows:
   version: 2
   ci-cd:
     jobs:
-      - test
+      - checkout
+      - codecov/upload
       - build:
           requires:
             - test
