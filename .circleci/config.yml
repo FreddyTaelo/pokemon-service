@@ -31,9 +31,12 @@ jobs:
     executor: go-executor
     steps:
       - setup_remote_docker:
-        docker_layer_caching: true
-        security_opt: [ "seccomp=unconfined" ]
+          docker_layer_caching: true
+          security_opt: ["seccomp=unconfined"]
       - checkout
+      - run:
+          name: Set Docker host
+          command: export DOCKER_HOST=tcp://localhost:2375
       - run:
           name: Install Docker CLI
           command: |
@@ -48,11 +51,9 @@ jobs:
       - run:
           name: Save Docker Image as Tar File
           command: docker save -o pokemon-service.tar pokemon-service
-
       - run:
           name: Check if .tar file exists
           command: ls -lh
-
       - persist_to_workspace:
           root: .
           paths:
@@ -66,10 +67,6 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      #- run:
-      #    name: Clean up directory before checkout
-      #    command: |
-      #      rm -rf /home/circleci/pokemon-service/*
       - run:
           name: Install Docker CLI
           command: |
@@ -78,7 +75,6 @@ jobs:
       - run:
           name: Check files after attaching workspace
           command: ls -lh
-      #- checkout
       - add_ssh_keys:
           fingerprints:
             - "SHA256:6phG9JfoCKelQ0zFqp8+6n5ZMZrOpHfjUR8UdXMZiHE"
@@ -88,11 +84,10 @@ jobs:
             echo "$AWS_PRIVATE_KEY" > key.pem
             chmod 400 key.pem
             scp -o StrictHostKeyChecking=no -i key.pem pokemon-service.tar $AWS_SSH_USER@$AWS_EC2_IP:/home/$AWS_SSH_USER/
-
       - run:
           name: Run Docker Container on EC2
           command: |
-            ssh -o StrictHostKeyChecking=no -i key.pem $AWS_SSH_USER@$AWS_EC2_IP \<< 'EOF'
+            ssh -o StrictHostKeyChecking=no -i key.pem $AWS_SSH_USER@$AWS_EC2_IP << 'EOF'
               docker load -i pokemon-service.tar
               docker stop pokemon-service || true
               docker rm pokemon-service || true
@@ -110,4 +105,3 @@ workflows:
       - deploy:
           requires:
             - build
-
