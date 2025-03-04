@@ -93,7 +93,7 @@ jobs:
               docker stop pokemon-service || true
               docker rm pokemon-service || true
               docker run -d -p 5000:5000 --name pokemon-service pokemon-service
-              EOF
+              \<<EOF
 
 workflows:
   version: 2
