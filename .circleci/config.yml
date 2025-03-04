@@ -5,6 +5,7 @@ executors:
     docker:
       - image: cimg/go:1.22
       - image: docker:dind
+        privileged: true
     working_directory: ~/pokemon-service
 
 jobs:
@@ -29,7 +30,9 @@ jobs:
   build:
     executor: go-executor
     steps:
-      - setup_remote_docker
+      - setup_remote_docker:
+        docker_layer_caching: true
+        security_opt: [ "seccomp=unconfined" ]
       - checkout
       - run:
           name: Install Docker CLI
