@@ -88,12 +88,12 @@ jobs:
       - run:
           name: Run Docker Container on EC2
           command: |
-            ssh -o StrictHostKeyChecking=no -i key.pem $AWS_SSH_USER@$AWS_EC2_IP \<<\'EOF\'
+            ssh -o StrictHostKeyChecking=no -t -i key.pem $AWS_SSH_USER@$AWS_EC2_IP \<<\'EOF\'
               docker load -i pokemon-service.tar
               docker stop pokemon-service || true
               docker rm pokemon-service || true
               docker run -d -p 5000:5000 --name pokemon-service pokemon-service
-            EOF
+            \'EOF\'
 
 workflows:
   version: 2
