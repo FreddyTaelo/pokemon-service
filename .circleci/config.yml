@@ -18,7 +18,7 @@ jobs:
           name: Run tests
           command: go test -v ./... -coverprofile=coverage.out
       - run:
-          name: Display test coverage
+          name: Display tested coverage
           command: go tool cover -func=coverage.out
       - run:
           name: Upload Coverage to Codecov
