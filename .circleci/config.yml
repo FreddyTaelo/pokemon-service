@@ -64,6 +64,10 @@ jobs:
       - attach_workspace:
           at: .
       - run:
+          name: Clean up directory before checkout
+          command: |
+            rm -rf /home/circleci/pokemon-service/*
+      - run:
           name: Install Docker CLI
           command: |
             sudo apt-get update
