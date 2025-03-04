@@ -39,8 +39,7 @@ workflows:
   version: 2
   ci-cd:
     jobs:
-      - checkout
-      - codecov/upload
+      - test
       - build:
           requires:
             - test
