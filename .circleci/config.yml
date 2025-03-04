@@ -4,7 +4,7 @@ executors:
   go-executor:
     docker:
       - image: golang:1.22
-    working_directory: ~/project
+    working_directory: ~/pokemon-service
 
 jobs:
   test:
@@ -32,6 +32,42 @@ jobs:
       - run:
           name: Build Go binary
           command: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/pokemon-service cmd/main.go
+      - run:
+          name: Build Docker Image
+          command: docker build -t pokemon-service .
+      - run:
+          name: Save Docker Image as Tar File
+          command: docker save -o pokemon-service.tar pokemon-service
+      - persist_to_workspace:
+          root: .
+          paths:
+            - pokemon-service.tar
+
+  deploy:
+    executor: go-executor
+    docker:
+      - image: circleci/python
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:6phG9JfoCKelQ0zFqp8+6n5ZMZrOpHfjUR8UdXMZiHE"
+      - run:
+          name: Copy Docker Image to EC2
+          command: |
+            echo "$AWS_PRIVATE_KEY" > key.pem
+            chmod 400 key.pem
+            scp -o StrictHostKeyChecking=no -i key.pem pokemon-service.tar $AWS_SSH_USER@$AWS_EC2_IP:/home/$AWS_SSH_USER/
+
+      - run:
+          name: Run Docker Container on EC2
+          command: |
+            ssh -o StrictHostKeyChecking=no -i key.pem $AWS_SSH_USER@$AWS_EC2_IP << 'EOF'
+              docker load -i pokemon-service.tar
+              docker stop pokemon-service || true
+              docker rm pokemon-service || true
+              docker run -d -p 5000:5000 --name pokemon-service pokemon-service
+            EOF
 
 workflows:
   version: 2
@@ -41,4 +77,5 @@ workflows:
       - build:
           requires:
             - test
+      - deploy
 
