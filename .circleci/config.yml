@@ -4,8 +4,6 @@ executors:
   go-executor:
     docker:
       - image: cimg/go:1.22
-      - image: docker:dind
-        privileged: true
     working_directory: ~/pokemon-service
 
 jobs:
@@ -32,11 +30,7 @@ jobs:
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
-          security_opt: ["seccomp=unconfined"]
       - checkout
-      - run:
-          name: Set Docker host
-          command: export DOCKER_HOST=tcp://localhost:2375
       - run:
           name: Install Docker CLI
           command: |
@@ -61,10 +55,9 @@ jobs:
 
   deploy:
     executor: go-executor
-    docker:
-      - image: circleci/python
-      - image: docker
     steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
       - attach_workspace:
           at: .
       - run:
