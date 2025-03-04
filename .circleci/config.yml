@@ -38,6 +38,11 @@ jobs:
       - run:
           name: Save Docker Image as Tar File
           command: docker save -o pokemon-service.tar pokemon-service
+
+      - run:
+          name: Check if .tar file exists
+          command: ls -lh
+
       - persist_to_workspace:
           root: .
           paths:
@@ -50,6 +55,9 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+      - run:
+          name: Check files after attaching workspace
+          command: ls -lh
       - checkout
       - add_ssh_keys:
           fingerprints:
