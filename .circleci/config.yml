@@ -32,7 +32,7 @@ jobs:
           docker_layer_caching: true
       - checkout
       - run:
-          name: Install Docker CLI
+          name: Install Docker CLI commands
           command: |
             sudo apt-get update
             sudo apt-get remove -y containerd containerd.io docker-ce docker-ce-cli docker.io || true

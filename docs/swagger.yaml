@@ -31,8 +31,8 @@ definitions:
 host: localhost:5000
 info:
   contact: {}
-  description: This is a sample Pokémon API using Golang.
-  title: Pokémon API
+  description: This is a sample Pokemon API using Golang.
+  title: Pokemon API
   version: "1.0"
 paths:
   /api/pokemon:

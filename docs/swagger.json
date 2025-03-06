@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a sample Pokémon API using Golang.",
-        "title": "Pokémon API",
+        "description": "This is a sample Pokemon API using Golang.",
+        "title": "Pokemon API",
         "contact": {},
         "version": "1.0"
     },
