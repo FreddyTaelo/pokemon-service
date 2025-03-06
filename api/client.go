@@ -13,3 +13,7 @@ var client = &http.Client{
 func GetClient() *http.Client {
 	return client
 } /*GetClient()*/
+
+func SetClient(c *http.Client) { // client for testing
+	client = c
+}
