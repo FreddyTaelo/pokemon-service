@@ -26,7 +26,13 @@ RESPONSE
 [{"id":1,"name":"bulbasaur","image":"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png","height":0,"weight":0,"types":null,"stats":null},{"id":2,"name":"ivysaur","image":"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png","height":0,"weight":0,"types":null,"stats":null},{"id":3,"name":"venusaur","image":"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png","height":0,"weight":0,"types":null,"stats":null},{"id":4,"name":"charmander","image":"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png","height":0,"weight":0,"types":null,"stats":null},{"id":5,"name":"charmeleon","image":"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png","height":0,"weight":0,"types":null,"stats":null},{"id":6,"name":"charizard","image":"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png","height":0,"weight":0,"types":null,"stats":null},{"id":7,"name":"squirtle","image":"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png","height":0,"weight":0,"types":null,"stats":null},{"id":8,"name":"wartortle","image":"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png","height":0,"weight":0,"types":null,"stats":null},..]
 ```
 
-TODO
+# Instruction to run
+```
+Using make file
 
-- instructions to run
-- add extra test
+$ make run
+
+```
+Todo 
+
+- add more extra test
