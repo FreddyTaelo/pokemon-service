@@ -2,16 +2,17 @@
 package config
 
 import (
+	"github.com/joho/godotenv"
 	"log"
 	"os"
-
-	"github.com/joho/godotenv"
 )
 
 type Config struct {
-	PokeAPIURL string
-	Port       string
-	Address    string
+	PokeAPIURL         string
+	Port               string
+	Address            string
+	RateLimitPerSecond string
+	RateLimitBurst     string
 }
 
 func LoadConfig() *Config {
@@ -20,9 +21,11 @@ func LoadConfig() *Config {
 	}
 
 	return &Config{
-		PokeAPIURL: getEnv("POKEAPI_URL", "https://pokeapi.co/api/v2"),
-		Port:       getEnv("PORT", "5000"),
-		Address:    getEnv("ADDR", "0.0.0.0"),
+		PokeAPIURL:         getEnv("POKEAPI_URL", "https://pokeapi.co/api/v2"),
+		Port:               getEnv("PORT", "5000"),
+		Address:            getEnv("ADDR", "0.0.0.0"),
+		RateLimitPerSecond: getEnv("RATE_PER_SECOND", "20"),
+		RateLimitBurst:     getEnv("RATE_BURST", "100"),
 	}
 } /*LoadConfig()*/
 

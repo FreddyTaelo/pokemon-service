@@ -42,6 +42,4 @@ Todo
 
 - add more extra test
 - optimize memory allocation
-- reusing http requests
-- implement rate limiting
 - go routine around
