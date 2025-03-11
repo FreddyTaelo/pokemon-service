@@ -1,6 +1,6 @@
 module pokemon-service
 
-go 1.22.0
+go 1.23.0
 
 toolchain go1.23.5
 
@@ -21,7 +21,6 @@ require (
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/mailru/easyjson v0.9.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/swaggo/files v1.0.1 // indirect
 	golang.org/x/net v0.35.0 // indirect
 	golang.org/x/tools v0.30.0 // indirect
@@ -32,4 +31,5 @@ require (
 	github.com/gorilla/handlers v1.5.2
 	github.com/gorilla/mux v1.8.1
 	github.com/stretchr/testify v1.10.0
+	golang.org/x/time v0.11.0
 )
