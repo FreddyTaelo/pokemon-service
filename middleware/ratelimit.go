@@ -25,7 +25,7 @@ func init() {
 	limiter = rate.NewLimiter(rate.Limit(rateLimit), rateLimitBurst) // 100 requests burst
 }
 
-// RateLimitMiddleware - 100 requests per 5 seconds with 100 bursts
+// 100 requests per 5 seconds with 100 bursts
 func RateLimitMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if !limiter.Allow() {
@@ -34,4 +34,4 @@ func RateLimitMiddleware(next http.Handler) http.Handler {
 		}
 		next.ServeHTTP(w, r)
 	})
-}
+} /*RateLimitMiddleware()*/
