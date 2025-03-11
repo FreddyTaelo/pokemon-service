@@ -4,6 +4,7 @@ package services
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"pokemon-service/api"
 	"pokemon-service/config"
 	"pokemon-service/models"
@@ -17,7 +18,12 @@ func GetPokemonList() ([]models.Pokemon, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+
+		}
+	}(resp.Body)
 
 	var result struct {
 		Results []struct {
@@ -29,7 +35,7 @@ func GetPokemonList() ([]models.Pokemon, error) {
 		return nil, err
 	}
 
-	pokemons := []models.Pokemon{}
+	var pokemons []models.Pokemon
 	for i, p := range result.Results {
 		pokemons = append(pokemons, models.Pokemon{
 			ID:    i + 1,
@@ -46,7 +52,12 @@ func GetPokemonDetails(id int) (*models.Pokemon, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+
+		}
+	}(resp.Body)
 
 	var data struct {
 		ID      int    `json:"id"`
