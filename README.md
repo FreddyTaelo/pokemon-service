@@ -44,5 +44,4 @@ Todo
 - optimize memory allocation
 - reusing http requests
 - implement rate limiting
-- reuse http request
 - go routine around
