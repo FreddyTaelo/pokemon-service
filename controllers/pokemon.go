@@ -25,7 +25,10 @@ func GetPokemonList(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(pokemons)
+	err = json.NewEncoder(w).Encode(pokemons)
+	if err != nil {
+		return
+	}
 }
 
 // @Summary Get Pokémon Details

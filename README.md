@@ -1,6 +1,11 @@
 # pokemon-service
 Get Pokemon details
 
+Microservice to retrieve pokemons
+operations
+- get 1st 100 pokemon
+- get pokemon details by id
+
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/FreddyTaelo/pokemon-service/tree/main.svg?style=svg)](https://circleci.com/gh/FreddyTaelo/pokemon-service/tree/main)
 [![codecov](https://codecov.io/gh/FreddyTaelo/pokemon-service/graph/badge.svg?token=AAVXBDIK7R)](https://codecov.io/gh/FreddyTaelo/pokemon-service)
 
@@ -36,3 +41,8 @@ $ make run
 Todo 
 
 - add more extra test
+- optimize memory allocation
+- reusing http requests
+- implement rate limiting
+- reuse http request
+- go routine around
