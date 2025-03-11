@@ -19,7 +19,10 @@ func RegisterRoutes() *mux.Router {
 	//  Health Check Endpoint
 	router.HandleFunc("/api/health", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Healthy"))
+		_, err := w.Write([]byte("Healthy"))
+		if err != nil {
+			return
+		}
 	}).Methods("GET")
 
 	return router

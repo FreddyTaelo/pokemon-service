@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"pokemon-service/api"
 	"pokemon-service/config"
 	"pokemon-service/models"
@@ -21,7 +22,7 @@ func GetPokemonList() ([]models.Pokemon, error) {
 	defer func(Body io.ReadCloser) {
 		err := Body.Close()
 		if err != nil {
-
+			log.Printf("Failed to close response body")
 		}
 	}(resp.Body)
 
@@ -55,7 +56,7 @@ func GetPokemonDetails(id int) (*models.Pokemon, error) {
 	defer func(Body io.ReadCloser) {
 		err := Body.Close()
 		if err != nil {
-
+			log.Printf("Failed to close response body")
 		}
 	}(resp.Body)
 
